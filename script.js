@@ -1,22 +1,3 @@
-// // GAMEBOARD
-
-// const gameBoard = () => {
-
-//     let gameArray = ["x", "O", "X", "O", "X", "O", "X", "O", "X"];
-    
-    
-//     const render = () => {
-//         console.log("start");
-//     }
-    
-//     const fillXO = (id, value) => {
-//         if (value%2 === 0 ) {
-//             document.getElementById(id).innerHTML = "O";
-//         } else if (value%2 !== 0) {
-//             document.getElementById(id).innerHTML = "X";
-//         }
-//     }
-    
 //     document.getElementById("btn1").addEventListener("click", fillXO("btn1", document.getElementById("btn1").value));
     
 //     document.getElementById("btn2").addEventListener("click", fillXO("btn2",document.getElementById("btn2").value));
@@ -39,40 +20,37 @@
 //     startBtn.addEventListener("click", render);
 // };
 
-// // CONTROLLER controls flow of game 
-// const controller = (function() {
-    
-// })();
-
-// // creating new players 
-// const player = (name, letter) => {
-//     return {name, letter};
-// };
-
-// const player1 = player(document.getElementById("player1").value, document.getElementById("player1Letter").value.toUpperCase());
-
-// const player2 = player(document.getElementById("player2").value, document.getElementById("player2Letter").value.toUpperCase());
-
-
-const ticTacToe = (function() {
-    const gameBoard = {
-        gameArray: ["X", "O", "X", "O", "X", "O", "X", "O", "X"]
-    }
-
-    const displayController = {
-
+const Gameboard = (function() {
+    const board = {
+        gameBoard: ["X", "O", "X", "O", "X", "O", "X", "O", "X"]
     }
     
-})();
-
-function render() {
-    for (i = 1; i <= 9; i++) {
-        if (document.getElementById(`btn${i}`).value%2 === 0) {
-            document.getElementById(`btn${i}`).innerHTML = "O";
-        } else if (document.getElementById(`btn${i}`).value%2 !== 0) {
-            document.getElementById(`btn${i}`).innerHTML = "X";
+    function render() {
+        for (i = 0; i < board.gameBoard.length; i++) {
+            if (i === 0) {
+                document.getElementById(`btn${i}`).innerHTML = board.gameBoard[i]
+            } else if (i%2 === 0) {
+                document.getElementById(`btn${i}`).innerHTML = board.gameBoard[i];
+            } else if (i%2 !== 0) {
+                document.getElementById(`btn${i}`).innerHTML = board.gameBoard[i];
+            }
         }
     }
+    return {
+        render
+    }
+})();
+
+const DisplayController = (function() {
+})();
+
+document.querySelector(".start").addEventListener("click", Gameboard.render); 
+
+const playerCreator = (name) => {
+    const sayName = () => console.log(`Hi ${name}`);
+    let playerCount = 0;
+    return {name, sayName};
 }
 
-render();
+const player1 = playerCreator(document.querySelector("#player1").value);
+const player2 = playerCreator(document.querySelector("#player2").value);
